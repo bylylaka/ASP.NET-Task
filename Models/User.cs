@@ -7,9 +7,11 @@ namespace my_new_app.Models
 {
     public class User
     {
-        public int Id { get; set; }
+        public int UserId { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
         public string Password { get; set; }
+
+        public ICollection<History> Historys { get; set; }
     }
 }

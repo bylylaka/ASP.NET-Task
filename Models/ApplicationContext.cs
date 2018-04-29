@@ -14,6 +14,7 @@ namespace my_new_app.Models
         public DbSet<Status> Statuss { get; set; }
         public DbSet<Urgency> Urgencys { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<UserAction> UserActions { get; set; }
 
         public ApplicationContext(DbContextOptions<ApplicationContext> options)
             : base(options)

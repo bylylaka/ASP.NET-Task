@@ -31,15 +31,36 @@ namespace my_new_app.controllers
             return db.Users.ToList();
         }
 
-        [Route("api/getUser")]
-        [HttpGet]
-        public IEnumerable<User> GetUser(int id)
+        [Route("/newBug")]
+        [HttpPost]
+        public IActionResult newBug(string ShortDescr, string FullDescr, string Urgency, string Criticality)
         {
-            IEnumerable<User> list = db.Users.ToList();
-            var Maxim = from a in list
-                        where a.Id == id
-                        select a;
-            return Maxim;
+            Bug bug = new Bug();
+
+            bug.Date = DateTime.Now;
+            bug.ShortDescr = ShortDescr;
+            bug.FullDescr = FullDescr;
+
+            bug.Status = "New";
+            bug.Urgency = Urgency;
+            bug.Criticality = Criticality;
+
+            db.Bugs.Add(bug);
+
+
+
+
+
+            History history = new History();        //Тут подумай как добавить
+            history.BugId = bug.BugId;
+            history.UserId = 1;
+            history.Date = bug.Date;
+            history.UserAction = "Enter";
+            history.Comment = "";
+            db.Historys.Add(history);
+
+            db.SaveChanges();
+            return Ok(bug);
         }
     }
 }

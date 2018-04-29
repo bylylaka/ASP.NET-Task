@@ -5,16 +5,35 @@ using System.Threading.Tasks;
 
 namespace my_new_app.Models
 {
+    //public enum Statuss
+    //{
+    //    New, Opened, Solved, Closed
+    //}
+
+    //public enum Urgencys
+    //{
+    //    VeryUrgently, Urgently, DoNotRush, NotAtAllUrgently
+    //}
+
+    //public enum Criticalitys
+    //{
+    //    Emergency, Critical, Uncritical, ChangeRequest
+    //}
+
     public class Bug
     {
-        public int Id { get; set; }
+        public int BugId { get; set; }
         public DateTime Date { get; set; }
         public string ShortDescr { get; set; }
         public string FullDescr { get; set; }
-        public User User { get; set; }
-        public Status Status { get; set; }
-        public Urgency Urgency { get; set; }
-        public Criticality Criticality { get; set; }
-        public List<History> histories { get; set; }
+        //public status status { get; set; }
+        //public urgency urgency { get; set; }
+        //public criticality criticality { get; set; }
+
+        public string Status { get; set; }
+        public string Urgency { get; set; }
+        public string Criticality { get; set; }
+
+        public ICollection<History> Historys { get; set; }
     }
 }

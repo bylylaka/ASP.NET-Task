@@ -23,7 +23,7 @@ namespace my_new_app
         {
             services.AddMvc();
             // получаем строку подключения из файла конфигурации
-            string connection = "Server=(localdb)\\mssqllocaldb;Database=bugsDb;Trusted_Connection=True";
+            string connection = "Server=(localdb)\\mssqllocaldb;Database=bugsDataBase;Trusted_Connection=True";
             // добавляем контекст MobileContext в качестве сервиса в приложение
             services.AddDbContext<ApplicationContext>(options =>
                 options.UseSqlServer(connection));

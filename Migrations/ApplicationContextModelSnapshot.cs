@@ -22,10 +22,10 @@ namespace mynewapp.Migrations
 
             modelBuilder.Entity("my_new_app.Models.Bug", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("BugId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("CriticalityName");
+                    b.Property<string>("Criticality");
 
                     b.Property<DateTime>("Date");
 
@@ -33,21 +33,11 @@ namespace mynewapp.Migrations
 
                     b.Property<string>("ShortDescr");
 
-                    b.Property<string>("StatusName");
+                    b.Property<string>("Status");
 
-                    b.Property<string>("UrgencyName");
+                    b.Property<string>("Urgency");
 
-                    b.Property<int?>("UserId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CriticalityName");
-
-                    b.HasIndex("StatusName");
-
-                    b.HasIndex("UrgencyName");
-
-                    b.HasIndex("UserId");
+                    b.HasKey("BugId");
 
                     b.ToTable("Bugs");
                 });
@@ -64,20 +54,20 @@ namespace mynewapp.Migrations
 
             modelBuilder.Entity("my_new_app.Models.History", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("HistoryId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Action");
-
-                    b.Property<int?>("BugId");
+                    b.Property<int>("BugId");
 
                     b.Property<string>("Comment");
 
                     b.Property<DateTime>("Date");
 
-                    b.Property<int?>("UserId");
+                    b.Property<string>("UserAction");
 
-                    b.HasKey("Id");
+                    b.Property<int>("UserId");
+
+                    b.HasKey("HistoryId");
 
                     b.HasIndex("BugId");
 
@@ -108,7 +98,7 @@ namespace mynewapp.Migrations
 
             modelBuilder.Entity("my_new_app.Models.User", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("UserId")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("Name");
@@ -117,39 +107,32 @@ namespace mynewapp.Migrations
 
                     b.Property<string>("Surname");
 
-                    b.HasKey("Id");
+                    b.HasKey("UserId");
 
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("my_new_app.Models.Bug", b =>
+            modelBuilder.Entity("my_new_app.Models.UserAction", b =>
                 {
-                    b.HasOne("my_new_app.Models.Criticality", "Criticality")
-                        .WithMany()
-                        .HasForeignKey("CriticalityName");
+                    b.Property<string>("Name")
+                        .ValueGeneratedOnAdd();
 
-                    b.HasOne("my_new_app.Models.Status", "Status")
-                        .WithMany()
-                        .HasForeignKey("StatusName");
+                    b.HasKey("Name");
 
-                    b.HasOne("my_new_app.Models.Urgency", "Urgency")
-                        .WithMany()
-                        .HasForeignKey("UrgencyName");
-
-                    b.HasOne("my_new_app.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
+                    b.ToTable("UserActions");
                 });
 
             modelBuilder.Entity("my_new_app.Models.History", b =>
                 {
-                    b.HasOne("my_new_app.Models.Bug")
-                        .WithMany("histories")
-                        .HasForeignKey("BugId");
+                    b.HasOne("my_new_app.Models.Bug", "Bug")
+                        .WithMany("Historys")
+                        .HasForeignKey("BugId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("my_new_app.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
+                        .WithMany("Historys")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }
