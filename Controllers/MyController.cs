@@ -24,11 +24,11 @@ namespace my_new_app.controllers
             return "It's time to show - who is boss here!";
         }
 
-        [Route("api/getUsers")]
+        [Route("api/getBugs")]
         [HttpGet]
-        public IEnumerable<User> Get()
+        public IEnumerable<Bug> Get()
         {
-            return db.Users.ToList();
+            return db.Bugs.ToList();
         }
 
         [Route("/newBug")]
