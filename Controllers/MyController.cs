@@ -62,5 +62,13 @@ namespace my_new_app.controllers
             db.SaveChanges();
             return Ok(bug);
         }
+
+        [Route("api/Test")]
+        [HttpGet]
+        public DateTime Test()
+        {
+            DateTime date = DateTime.Now;
+            return date;
+        }
     }
 }
