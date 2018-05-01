@@ -52,14 +52,46 @@ namespace my_new_app.controllers
             return Ok(bug);
         }
 
-
-
-
         [HttpGet("api/getBug/{id}")]
         public Bug GetBug(int id)
         {
             Bug bug = db.Bugs.FirstOrDefault(x => x.BugId == id);
             return bug;
+        }
+
+
+
+
+
+
+        [HttpPost("api/cgangeBug/{id}")]
+        public IActionResult CgangeBug(int id, string Comment, string Status)
+        {
+            History history = new History();
+            history.BugId = id;
+            history.UserId = 1;
+            history.Date = DateTime.Now;
+            history.UserAction = Status;
+            history.Comment = Comment;
+            db.Historys.Add(history);
+
+            db.SaveChanges();
+            return Ok(history);
+        }
+
+
+
+
+
+
+        [HttpGet("api/getHistoty/{id}")]
+        public IEnumerable<History> GetHistory(int id)
+        {
+            var history = db.Historys
+               .Where(b => b.BugId.Equals(id))
+               .ToList();
+
+            return history;
         }
     }
 }

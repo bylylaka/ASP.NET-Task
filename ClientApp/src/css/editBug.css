@@ -1,0 +1,8 @@
+﻿.editBug{
+    margin: 0 auto;
+    text-align: center
+}
+
+.editBug table, .editBug form {
+    margin-bottom: 5%;
+}
