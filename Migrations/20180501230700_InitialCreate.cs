@@ -28,50 +28,6 @@ namespace mynewapp.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Criticalitys",
-                columns: table => new
-                {
-                    Name = table.Column<string>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Criticalitys", x => x.Name);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Statuss",
-                columns: table => new
-                {
-                    Name = table.Column<string>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Statuss", x => x.Name);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Urgencys",
-                columns: table => new
-                {
-                    Name = table.Column<string>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Urgencys", x => x.Name);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "UserActions",
-                columns: table => new
-                {
-                    Name = table.Column<string>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_UserActions", x => x.Name);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Users",
                 columns: table => new
                 {
@@ -130,19 +86,7 @@ namespace mynewapp.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Criticalitys");
-
-            migrationBuilder.DropTable(
                 name: "Historys");
-
-            migrationBuilder.DropTable(
-                name: "Statuss");
-
-            migrationBuilder.DropTable(
-                name: "Urgencys");
-
-            migrationBuilder.DropTable(
-                name: "UserActions");
 
             migrationBuilder.DropTable(
                 name: "Bugs");

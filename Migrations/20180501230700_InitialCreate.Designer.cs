@@ -11,7 +11,7 @@ using System;
 namespace mynewapp.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20180501201606_InitialCreate")]
+    [Migration("20180501230700_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -43,16 +43,6 @@ namespace mynewapp.Migrations
                     b.ToTable("Bugs");
                 });
 
-            modelBuilder.Entity("my_new_app.Models.Criticality", b =>
-                {
-                    b.Property<string>("Name")
-                        .ValueGeneratedOnAdd();
-
-                    b.HasKey("Name");
-
-                    b.ToTable("Criticalitys");
-                });
-
             modelBuilder.Entity("my_new_app.Models.History", b =>
                 {
                     b.Property<int>("HistoryId")
@@ -77,26 +67,6 @@ namespace mynewapp.Migrations
                     b.ToTable("Historys");
                 });
 
-            modelBuilder.Entity("my_new_app.Models.Status", b =>
-                {
-                    b.Property<string>("Name")
-                        .ValueGeneratedOnAdd();
-
-                    b.HasKey("Name");
-
-                    b.ToTable("Statuss");
-                });
-
-            modelBuilder.Entity("my_new_app.Models.Urgency", b =>
-                {
-                    b.Property<string>("Name")
-                        .ValueGeneratedOnAdd();
-
-                    b.HasKey("Name");
-
-                    b.ToTable("Urgencys");
-                });
-
             modelBuilder.Entity("my_new_app.Models.User", b =>
                 {
                     b.Property<int>("UserId")
@@ -113,16 +83,6 @@ namespace mynewapp.Migrations
                     b.HasKey("UserId");
 
                     b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("my_new_app.Models.UserAction", b =>
-                {
-                    b.Property<string>("Name")
-                        .ValueGeneratedOnAdd();
-
-                    b.HasKey("Name");
-
-                    b.ToTable("UserActions");
                 });
 
             modelBuilder.Entity("my_new_app.Models.History", b =>
