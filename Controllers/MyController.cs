@@ -75,6 +75,11 @@ namespace my_new_app.controllers
             history.Comment = Comment;
             db.Historys.Add(history);
 
+            Bug bug = db.Bugs
+               .Where(b => b.BugId.Equals(id))
+               .ToList()[0];
+            bug.Status = Status;
+
             db.SaveChanges();
             return Ok(history);
         }

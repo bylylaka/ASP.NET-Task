@@ -11,6 +11,7 @@ export default class EditBug extends React.Component {
             historys: new Array()
         };
         this.getHistory = this.getHistory.bind(this);
+        this.Form = this.Form.bind(this);
     }
 
     componentDidMount() {
@@ -27,8 +28,6 @@ export default class EditBug extends React.Component {
                     dat.date = (new Date(dat.date)).toString()
                 });
                 this.setState({ historys: history.data })
-
-                console.log(this.state.historys)
             }))
             .catch(error => console.log(error));
     }
@@ -75,9 +74,34 @@ export default class EditBug extends React.Component {
         return historys;
     }
 
+    Form() {
+        if (this.state.bug.status != "Closed")
+            return (
+                <form action={"api/cgangeBug/" + this.props.match.params.bug} method="post">
+                    <label>
+                        Comment:
+                                <input type="text" name="Comment" placeholder="Type here..." required />
+                    </label>
+                    <label>
+                        Status:
+                                <select name="Status">
+                            <option value="Opened" defaultValue>Opened</option>
+                            <option value="Solved">Solved</option>
+                            <option value="Closed">Closed</option>
+                        </select>
+                    </label>
+                    <button type="submit">Send</button>
+                </form>
+            );
+        else 
+            return ''
+    }
 
     render() {
-        if (this.state.bug != null) {
+        if (this.state.bug != null && this.state.historys.length != 0) {
+
+            
+
             var date = new Date();
             date.setTime(Date.parse(this.state.bug.date));
             date = date.toLocaleDateString() + ' ' + date.toLocaleTimeString();
@@ -106,27 +130,7 @@ export default class EditBug extends React.Component {
                         </tbody>
                     </table>
 
-
-
-
-                    <form action={"api/cgangeBug/" + this.props.match.params.bug} method="post">
-                        <label>
-                            Comment:
-                            <input type="text" name="Comment" placeholder="Type here..." required />
-                        </label>
-                        <label>
-                            Status:
-                            <select name="Status">
-                                <option value="Opened" defaultValue>Opened</option>
-                                <option value="Solved">Solved</option>
-                                <option value="Closedh">Closed</option>
-                            </select>
-                        </label>
-                        <button type="submit">Send</button>
-                    </form>
-
-
-
+                    {this.Form()}
 
                     <div>
                         <table>
@@ -149,7 +153,7 @@ export default class EditBug extends React.Component {
         else
             return (
                 <div className="editBug">
-                    go away!(
+                    Данных нет, либо они пока не загрузились.
                 </div>
             )
     }

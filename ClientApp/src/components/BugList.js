@@ -1,6 +1,7 @@
 ﻿import axios from "axios/index";
 import '../css/BugList.css';
 var React = require('react');
+var Link = require('react-router-dom').Link;
 
 export default class BugList extends React.Component {
 
@@ -60,6 +61,12 @@ export default class BugList extends React.Component {
             date.setTime(Date.parse(bug.date));
             date = date.toLocaleDateString() + ' ' + date.toLocaleTimeString();
 
+            var edit;
+            if (bug.status != "Closed")
+                edit = (<Link to={"../editBug/" + bug.bugId}>Edit</Link>)
+            else
+                edit = (<Link to={"../editBug/" + bug.bugId}>View</Link>)
+
             return (
                 <React.Fragment>
                     <tr>
@@ -69,6 +76,7 @@ export default class BugList extends React.Component {
                         <td>{bug.fullDescr}</td>
                         <td>{bug.status}</td>
                         <td>{bug.urgency}</td>
+                        <th>{edit}</th>
                     </tr>
                 </React.Fragment>
             );

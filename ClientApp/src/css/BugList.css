@@ -8,5 +8,6 @@ table, th, td {
 
 .sortArrow {
     display: inline;
-    color: red
+    color: red;
+    cursor: pointer;
 }
