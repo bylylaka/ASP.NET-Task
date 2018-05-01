@@ -17,13 +17,6 @@ namespace my_new_app.controllers
             db = context;
         }
 
-        [Route("api/My/Gi")]
-        [HttpGet]
-        public String Gi()
-        {
-            return "It's time to show - who is boss here!";
-        }
-
         [Route("api/getBugs")]
         [HttpGet]
         public IEnumerable<Bug> Get()
@@ -47,10 +40,6 @@ namespace my_new_app.controllers
 
             db.Bugs.Add(bug);
 
-
-
-
-
             History history = new History();        //Тут подумай как добавить
             history.BugId = bug.BugId;
             history.UserId = 1;
@@ -63,12 +52,14 @@ namespace my_new_app.controllers
             return Ok(bug);
         }
 
-        [Route("api/Test")]
-        [HttpGet]
-        public DateTime Test()
+
+
+
+        [HttpGet("api/getBug/{id}")]
+        public Bug GetBug(int id)
         {
-            DateTime date = DateTime.Now;
-            return date;
+            Bug bug = db.Bugs.FirstOrDefault(x => x.BugId == id);
+            return bug;
         }
     }
 }
