@@ -10,6 +10,7 @@ namespace my_new_app.controllers
             context.Users.AddRange(
             new User
             {
+                Login = "Admin",
                 Name = "Admin",
                 Surname = "Admin",
                 Password = "123"

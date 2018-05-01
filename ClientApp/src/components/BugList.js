@@ -1,5 +1,6 @@
-﻿import axios from "axios/index";
-import '../css/BugList.css';
+﻿import '../css/BugList.css';
+import axios from "axios/index";
+import CheckAuth from "./CheckAuth";
 var React = require('react');
 var Link = require('react-router-dom').Link;
 
@@ -22,6 +23,7 @@ export default class BugList extends React.Component {
     }
 
     componentDidMount() {
+        CheckAuth.bind(this)();
         axios.get('api/getBugs')
             .then(res => {
                 let dates = Object.values(res.data).map((dat) => {

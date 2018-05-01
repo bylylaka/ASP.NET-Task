@@ -101,6 +101,8 @@ namespace mynewapp.Migrations
                     b.Property<int>("UserId")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("Login");
+
                     b.Property<string>("Name");
 
                     b.Property<string>("Password");

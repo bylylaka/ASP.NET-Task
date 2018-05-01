@@ -11,7 +11,7 @@ using System;
 namespace mynewapp.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20180429231909_InitialCreate")]
+    [Migration("20180501201606_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -101,6 +101,8 @@ namespace mynewapp.Migrations
                 {
                     b.Property<int>("UserId")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Login");
 
                     b.Property<string>("Name");
 

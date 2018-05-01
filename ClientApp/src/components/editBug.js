@@ -1,5 +1,6 @@
 ﻿import '../css/editBug.css'
 import axios from "axios/index";
+import CheckAuth from "./CheckAuth";
 var React = require('react');
 
 export default class EditBug extends React.Component {
@@ -15,6 +16,7 @@ export default class EditBug extends React.Component {
     }
 
     componentDidMount() {
+        CheckAuth.bind(this)();
         const { bug } = this.props.match.params;
 
         axios.all([
@@ -84,7 +86,7 @@ export default class EditBug extends React.Component {
                     </label>
                     <label>
                         Status:
-                                <select name="Status">
+                        <select name="Status">
                             <option value="Opened" defaultValue>Opened</option>
                             <option value="Solved">Solved</option>
                             <option value="Closed">Closed</option>
@@ -99,8 +101,6 @@ export default class EditBug extends React.Component {
 
     render() {
         if (this.state.bug != null && this.state.historys.length != 0) {
-
-            
 
             var date = new Date();
             date.setTime(Date.parse(this.state.bug.date));

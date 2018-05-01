@@ -1,9 +1,14 @@
 ﻿import '../css/newBug.css'
 import axios from "axios/index";
+import CheckAuth from "./CheckAuth"
 var Link = require('react-router-dom').Link;
 var React = require('react');
 
 export default class NewBug extends React.Component {
+
+    componentDidMount() {
+        CheckAuth.bind(this)();
+    }
 
     render() {
         return (
