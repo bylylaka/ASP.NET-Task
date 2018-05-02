@@ -26,7 +26,7 @@ namespace my_new_app.controllers
         [Authorize]
         [Route("api/getBugs")]
         [HttpGet]
-        public IEnumerable<Bug> Get()
+        public IEnumerable<Bug> GetBugs()
         {
             return db.Bugs.ToList();
         }
@@ -118,6 +118,16 @@ namespace my_new_app.controllers
             return user[0];
         }
 
+        [Authorize]
+        [Route("api/getUsers")]
+        [HttpGet]
+        public IEnumerable<User> GetUsers()
+        {
+            return db.Users
+                .Select(c => new User { UserId = c.UserId, Name = c.Name, Surname = c.Surname})
+                .ToList();
+        }
+
         [HttpPost("api/newUser")]
         public String AddUser(string Login, string Name, string Surname, string Password)
         {
@@ -180,10 +190,11 @@ namespace my_new_app.controllers
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id));
         }
 
-        public async Task<IActionResult> Logout()
+        [HttpGet("api/LogOut")]
+        public async void Logout()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            return RedirectToAction("Login", "Account");
+            return; 
         }
 
 

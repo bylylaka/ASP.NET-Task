@@ -1,5 +1,4 @@
-﻿import '../css/BugList.css';
-import axios from "axios/index";
+﻿import axios from "axios/index";
 import CheckAuth from "./CheckAuth";
 var React = require('react');
 var Link = require('react-router-dom').Link;
@@ -11,6 +10,7 @@ export default class Menu extends React.Component {
         this.state = {
             isAuth: 0
         };
+        this.logOut = this.logOut.bind(this);
     }
 
     componentDidMount() {
@@ -21,6 +21,10 @@ export default class Menu extends React.Component {
             })
     }
 
+    logOut() {
+        axios.get(`/api/logOut`);
+        window.location.reload();
+    }
 
     render() {
         if (this.state.isAuth == 1) {
@@ -29,7 +33,9 @@ export default class Menu extends React.Component {
                     <Link to="/Profile">Профиль</Link>
                     <Link to="/newBug">Новая ошибка</Link>
                     <Link to="/bugList">Все ошибки</Link>
+                    <Link to="/userList">Список пользователей</Link>
                     <Link to="/newUser">Новый пользователь</Link>
+                    <Link to="/" onClick={this.logOut}>Выйти</Link>
                 </ul>
             )
         }

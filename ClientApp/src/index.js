@@ -15,6 +15,7 @@ import SignIn from "./components/SignIn"
 import Profile from "./components/Profile"
 import NewUser from "./components/newUser"
 import Menu from "./components/Menu"
+import UserList from "./components/UserList"
 
 
 
@@ -32,6 +33,7 @@ ReactDOM.render(
             <Route exact path='/SignIn' component={SignIn} />
             <Route exact path='/Profile' component={Profile} />
             <Route exact path='/newUser' component={NewUser} />
+            <Route exact path='/userList' component={UserList} />
             <Route exact path='/' component={Profile} />
         </div>
   </BrowserRouter>,
