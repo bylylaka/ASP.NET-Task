@@ -48,7 +48,7 @@ namespace my_new_app.controllers
 
             db.Bugs.Add(bug);
 
-            History history = new History();        //Тут подумай как добавить
+            History history = new History();
             history.BugId = bug.BugId;
 
             var user = db.Users
@@ -62,7 +62,8 @@ namespace my_new_app.controllers
             db.Historys.Add(history);
 
             db.SaveChanges();
-            return Ok(bug);
+
+            return RedirectToAction("", "/bugList");
         }
 
         [Authorize]
@@ -79,7 +80,12 @@ namespace my_new_app.controllers
         {
             History history = new History();
             history.BugId = id;
-            history.UserId = 1;
+
+            var user = db.Users
+               .Where(b => b.Login.Equals(User.Identity.Name))
+               .ToList()[0];
+            history.UserId = user.UserId;
+
             history.Date = DateTime.Now;
             history.UserAction = Status;
             history.Comment = Comment;
@@ -91,7 +97,7 @@ namespace my_new_app.controllers
             bug.Status = Status;
 
             db.SaveChanges();
-            return Ok(history);
+            return RedirectToAction("", "/bugList");
         }
 
         [Authorize]
@@ -134,9 +140,8 @@ namespace my_new_app.controllers
             var users = db.Users.FirstOrDefault(u => u.Login == Login);
             if (users == null)
             {
-                // добавляем пользователя в бд
                 db.Users.Add(new User { Login = Login, Name = Name, Surname = Surname, Password = Password });
-                db.SaveChangesAsync();
+                db.SaveChanges();
                 return "User was successfully added!";
             }
             return "User with that Login exist already!";
@@ -161,7 +166,7 @@ namespace my_new_app.controllers
 
 
         [HttpPost("Login")]
-        public async Task<IActionResult> Login(string Login, string Password)
+        public async Task<String> Login(string Login, string Password)
         {
             if (ModelState.IsValid)
             {
@@ -170,11 +175,11 @@ namespace my_new_app.controllers
                 {
                     await Authenticate(Login); // аутентификация
 
-                    return RedirectToAction("Index", "/");
+                    return "OK";
                 }
                 ModelState.AddModelError("", "Некорректные логин и(или) пароль");
             }
-            return RedirectToAction("Index", "xyeva");
+            return "Неверный логин или пароль";
         }
 
         private async Task Authenticate(string Login)
@@ -191,10 +196,10 @@ namespace my_new_app.controllers
         }
 
         [HttpGet("api/LogOut")]
-        public async void Logout()
+        public async Task<String> Logout()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            return; 
+            return "";
         }
 
 

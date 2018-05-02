@@ -22,8 +22,7 @@ export default class Menu extends React.Component {
     }
 
     logOut() {
-        axios.get(`/api/logOut`);
-        window.location.reload();
+        axios.get(`/api/logOut`).then(res => { window.location.reload() })
     }
 
     render() {
