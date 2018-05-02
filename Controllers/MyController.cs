@@ -32,7 +32,7 @@ namespace my_new_app.controllers
         }
 
         [Authorize]
-        [Route("/newBug")]
+        [Route("api/newBug")]
         [HttpPost]
         public IActionResult newBug(string ShortDescr, string FullDescr, string Urgency, string Criticality)
         {
@@ -50,7 +50,12 @@ namespace my_new_app.controllers
 
             History history = new History();        //Тут подумай как добавить
             history.BugId = bug.BugId;
-            history.UserId = 1;
+
+            var user = db.Users
+               .Where(b => b.Login.Equals(User.Identity.Name))
+               .ToList()[0];
+
+            history.UserId = user.UserId;
             history.Date = bug.Date;
             history.UserAction = "Enter";
             history.Comment = "";
@@ -113,6 +118,20 @@ namespace my_new_app.controllers
             return user[0];
         }
 
+        [HttpPost("api/newUser")]
+        public String AddUser(string Login, string Name, string Surname, string Password)
+        {
+            var users = db.Users.FirstOrDefault(u => u.Login == Login);
+            if (users == null)
+            {
+                // добавляем пользователя в бд
+                db.Users.Add(new User { Login = Login, Name = Name, Surname = Surname, Password = Password });
+                db.SaveChangesAsync();
+                return "User was successfully added!";
+            }
+            return "User with that Login exist already!";
+        }
+
 
 
 
@@ -147,26 +166,6 @@ namespace my_new_app.controllers
             }
             return RedirectToAction("Index", "xyeva");
         }
-
-        //[HttpPost("SignIn")]
-        //public async Task<IActionResult> Register(string Login, string Name, string Surname, string Password)
-        //{
-        //    User user = await db.Users.FirstOrDefaultAsync(u => u.Login == Login);
-        //    if (user == null)
-        //    {
-        //        // добавляем пользователя в бд
-        //        db.Users.Add(new User { Login = Login, Name = Name, Surname = Surname, Password = Password });
-        //        await db.SaveChangesAsync();
-
-        //        await Authenticate(Login); // аутентификация
-
-        //        return RedirectToAction("Index", "/");
-        //    }
-        //    else
-        //        ModelState.AddModelError("", "User with this login already exist");
-
-        //    return RedirectToAction("Index", "xyeva");
-        //}
 
         private async Task Authenticate(string Login)
         {

@@ -12,7 +12,7 @@ export default class NewBug extends React.Component {
 
     render() {
         return (
-            <form action="/newBug" method="post">
+            <form action="api/newBug" method="post">
                 <label>
                     Short description:
                     <input type="text" name="ShortDescr" placeholder="Type here..." />

@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using my_new_app.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace my_new_app.controllers
 {
@@ -7,17 +8,20 @@ namespace my_new_app.controllers
     {
         public static void Initialize(ApplicationContext context)
         {
-            context.Users.AddRange(
-            new User
+            if (context.Users.Count() == 0)
             {
-                Login = "Admin",
-                Name = "Admin",
-                Surname = "Admin",
-                Password = "123"
-            }
-            );
+                context.Users.AddRange(
+                new User
+                {
+                    Login = "Admin",
+                    Name = "Admin",
+                    Surname = "Admin",
+                    Password = "123"
+                }
+                );
 
-            context.SaveChanges();
+                context.SaveChanges();
+            }
         }
     }
 }
