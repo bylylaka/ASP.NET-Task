@@ -12,7 +12,7 @@ export default class NewBug extends React.Component {
 
     render() {
         return (
-            <form action="api/newBug" method="post">
+            <form action="api/newBug" method="post" className="newBug">
                 <label>
                     Short description:
                     <input type="text" name="ShortDescr" placeholder="Type here..." />
@@ -41,9 +41,8 @@ export default class NewBug extends React.Component {
                         }
                     </select>
                 </label>
+                <hr/>
                 <button type="submit">Send</button>
-                <br/>
-                <Link to={"/bugList"}>Все ошибки</Link>
             </form>
         )
     }

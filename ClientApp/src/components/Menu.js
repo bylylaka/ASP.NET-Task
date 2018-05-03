@@ -1,4 +1,5 @@
-﻿import axios from "axios/index";
+﻿import '../css/menu.css';
+import axios from "axios/index";
 import CheckAuth from "./CheckAuth";
 var React = require('react');
 var Link = require('react-router-dom').Link;
@@ -28,14 +29,20 @@ export default class Menu extends React.Component {
     render() {
         if (this.state.isAuth == 1) {
             return (
-                <ul className="menu-main">
-                    <Link to="/Profile">Профиль</Link>
-                    <Link to="/newBug">Новая ошибка</Link>
-                    <Link to="/bugList">Все ошибки</Link>
-                    <Link to="/userList">Список пользователей</Link>
-                    <Link to="/newUser">Новый пользователь</Link>
-                    <Link to="/" onClick={this.logOut}>Выйти</Link>
-                </ul>
+                <div className="menu">
+                <input type="checkbox" id="menu-checkbox" />
+                    <nav role="navigation">
+                        <label htmlFor="menu-checkbox" className="toggle-button" data-open="Menu" data-close="Close"></label>
+                    <ul className="main-menu">
+                        <li><Link to="/Profile">Edit profile</Link></li>
+                        <li><Link to="/newBug">Add bug</Link></li>
+                        <li><Link to="/bugList">Bug list</Link></li>
+                        <li><Link to="/userList">User list</Link></li>
+                        <li><Link to="/newUser">Add user</Link></li>
+                        <li><Link to="/" onClick={this.logOut}>Log out</Link></li>
+                     </ul>
+                 </nav>
+                </div>
             )
         }
         else

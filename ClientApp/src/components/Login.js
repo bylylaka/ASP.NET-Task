@@ -1,4 +1,5 @@
-﻿import axios from "axios/index";
+﻿import '../css/login.css';
+import axios from "axios/index";
 var React = require('react');
 
 export default class Login extends React.Component {
@@ -53,17 +54,20 @@ export default class Login extends React.Component {
 
     render() {
         return (
-            <form onSubmit={this.handleSubmit} method="post">
-                <label>
-                    Login:
-                    <input type="text" name="Login" value={this.state.login} onChange={this.changeLogin} placeholder="Type here..." required />
-                </label>
-                <label>
-                    Password:
-                    <input type="password" name="Password" value={this.state.password} onChange={this.changePassword} placeholder="Type here..." required />
-                </label>
-                <button type="submit">Send</button>
-            </form>
+            <div className="Login">
+                <h1>Error accounting system</h1>
+                <form onSubmit={this.handleSubmit} method="post">
+                    <label>
+                        Login:
+                        <input type="text" name="Login" value={this.state.login} onChange={this.changeLogin} placeholder="Type here..." required />
+                    </label>
+                    <label>
+                        Password:
+                        <input type="password" name="Password" value={this.state.password} onChange={this.changePassword} placeholder="Type here..." required />
+                    </label>
+                    <button type="submit">Send</button>
+                    </form>
+            </div>
         )
     }
 }

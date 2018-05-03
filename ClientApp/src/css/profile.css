@@ -1,0 +1,12 @@
+﻿.Profile {
+    text-align: center;
+    border: 1px solid black;
+    width: 300px;
+    margin: 0 auto;
+    min-width: 300px;
+    padding: 5px;
+}
+
+.Profile form label:nth-child(3) input{
+    margin-left: 21px;
+}

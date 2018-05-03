@@ -1,0 +1,8 @@
+﻿.Login{
+    margin: 0 auto;
+    text-align: center
+}
+
+.Login form label:first-child input{
+    margin-left: 25px
+}

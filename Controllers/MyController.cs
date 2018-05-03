@@ -147,6 +147,18 @@ namespace my_new_app.controllers
             return "User with that Login exist already!";
         }
 
+        [HttpPost("api/editProfile")]
+        public String EditProfile(string Name, string Surname)
+        {
+            var user = db.Users
+              .Where(b => b.Login.Equals(User.Identity.Name))
+              .ToList()[0];
+
+            user.Name = Name;
+            user.Surname = Surname;
+            db.SaveChanges();
+            return "Success";
+        }
 
 
 
@@ -177,9 +189,8 @@ namespace my_new_app.controllers
 
                     return "OK";
                 }
-                ModelState.AddModelError("", "Некорректные логин и(или) пароль");
             }
-            return "Неверный логин или пароль";
+            return "Incorrect login/password";
         }
 
         private async Task Authenticate(string Login)

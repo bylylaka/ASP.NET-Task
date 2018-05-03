@@ -153,7 +153,7 @@ export default class EditBug extends React.Component {
         else
             return (
                 <div className="editBug">
-                    Данных нет, либо они пока не загрузились.
+                    No data still.
                 </div>
             )
     }

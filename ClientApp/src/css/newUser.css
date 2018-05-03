@@ -1,0 +1,31 @@
+﻿.newUser {
+    width: 350px;
+    margin: 0 auto;
+    border: 1px solid black;
+    padding: 10px 40px;
+    min-width: 280px;
+}
+
+.newUser label:first-child input {
+    margin-left: 26px;
+}
+
+.newUser label:nth-child(2) input {
+    margin-left: 26px;
+}
+
+.newUser label:nth-child(3) input {
+    margin-left: 5px;
+}
+
+.newUser button{
+    display: block;
+    margin: 0 auto;
+}
+
+@media only screen and (max-width: 400px) {
+    .newUser {
+        width: 280px;
+        padding: 5px;
+    }
+}
